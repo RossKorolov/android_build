@@ -177,19 +177,37 @@ class EdifyGenerator(object):
 
   def Mount(self, mount_point):
     """Mount the partition with the given mount_point."""
-    fstab = self.info.get("fstab", None)
-    if fstab:
-      p = fstab[mount_point]
-      self.script.append('mount("%s", "%s", "%s", "%s");' %
-                         (p.fs_type, common.PARTITION_TYPES[p.fs_type],
-                          p.device, p.mount_point))
-      self.mounts.add(p.mount_point)
+    if mount_point == "/data":
+      self.script.append('ifelse(
+        mount("ext4", "EMMC", "/dev/block/platform/msm_sdcc.1/by-name/userdata", "/data"),
+        (
+          # /data EXT4 mount
+          ui_print("/data is EXT4");
+        ),
+        (
+          # /data F2FS mount
+          mount("f2fs", "EMMC", "/dev/block/platform/msm_sdcc.1/by-name/userdata", "/data");
+          ui_print("/data is F2FS");
+        )		
+        );')
+    elif mount_point == "/system":
+      self.script.append('ifelse(
+        mount("ext4", "EMMC", "/dev/block/platform/msm_sdcc.1/by-name/system", "/system"),
+        (
+          # /system EXT4 mount
+          ui_print("/system is EXT4");
+        ),
+        (
+          # /system F2FS mount
+          mount("f2fs", "EMMC", "/dev/block/platform/msm_sdcc.1/by-name/system", "/system");
+          ui_print("/system is F2FS");
+        )
+        );')
+
 
   def Unmount(self, mount_point):
     """Unmount the partiiton with the given mount_point."""
-    if mount_point in self.mounts:
-      self.mounts.remove(mount_point)
-      self.script.append('unmount("%s");' % (mount_point,))
+    self.script.append('unmount("%s");' % (mount_point,))
 
   def UnpackPackageDir(self, src, dst):
     """Unpack a given directory from the OTA package into the given
@@ -210,14 +228,22 @@ class EdifyGenerator(object):
   def FormatPartition(self, partition):
     """Format the given partition, specified by its mount point (eg,
     "/system")."""
-
-    reserve_size = 0
-    fstab = self.info.get("fstab", None)
-    if fstab:
-      p = fstab[partition]
-      self.script.append('format("%s", "%s", "%s", "%s", "%s");' %
-                         (p.fs_type, common.PARTITION_TYPES[p.fs_type],
-                          p.device, p.length, p.mount_point))
+    self.script.append('ifelse(
+      mount("ext4", "EMMC", "/dev/block/platform/msm_sdcc.1/by-name/system", "/system"), 
+      (
+        # /system EXT4 mount
+        unmount("/system");
+        format("ext4", "EMMC", "/dev/block/platform/msm_sdcc.1/by-name/system", "0", "/system");
+        mount("ext4", "EMMC", "/dev/block/platform/msm_sdcc.1/by-name/system", "/system");
+        ui_print("Formatting /system (EXT4)");
+      ),
+      (
+        # /system F2FS mount
+        run_program("/sbin/mkfs.f2fs", "/dev/block/platform/msm_sdcc.1/by-name/system");
+        mount("f2fs", "EMMC", "/dev/block/platform/msm_sdcc.1/by-name/system", "/system");
+        ui_print("Formatting /system (F2FS)");
+      )
+      );')
 
   def DeleteFiles(self, file_list):
     """Delete all files in file_list."""
