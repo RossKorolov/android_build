@@ -632,7 +632,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     system_diff.WriteScript(script, output_zip)
   else:
     script.Print("Formatting /system...")
-    script.FormatSystemScript("/system")
+    script.FormatPartition("/system")
     script.Print("Unpacking /system files...")
     script.Mount("/system", recovery_mount_options)
     if not has_recovery_patch:
@@ -692,8 +692,6 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   script.Print("Installing boot.img...")
   script.ShowProgress(0.05, 5)
   script.WriteRawImage("/boot", "boot.img")
-
-  script.RemoveFormatScript("format.sh")
 
   script.ShowProgress(0.2, 10)
   script.Print("SaberMod CM12 complete!")
