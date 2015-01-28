@@ -38,7 +38,8 @@ LOCAL_DISABLE_GRAPHITE := \
    libwebrtc_spl \
    third_party_WebKit_Source_core_webcore_svg_gyp \
    libjni_filtershow_filters \
-   libavformat  
+   libavformat \
+   libavcodec
 
 ifneq (1,$(words $(filter $(LOCAL_DISABLE_GRAPHITE),$(LOCAL_MODULE))))
   ifdef LOCAL_CONLYFLAGS
