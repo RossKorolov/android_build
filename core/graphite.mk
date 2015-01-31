@@ -41,7 +41,8 @@ LOCAL_DISABLE_GRAPHITE := \
    libavformat \
    libavcodec \
    fio \
-   WhisperPush
+   WhisperPush \
+   Eleven
 
 ifneq (1,$(words $(filter $(LOCAL_DISABLE_GRAPHITE),$(LOCAL_MODULE))))
   ifdef LOCAL_CONLYFLAGS
