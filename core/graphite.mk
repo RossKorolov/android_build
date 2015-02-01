@@ -44,7 +44,10 @@ LOCAL_DISABLE_GRAPHITE := \
    WhisperPush \
    Eleven \
    Email \
-   libwebviewchromium
+   libwebviewchromium \
+   libwebviewchromium_loader \
+   libwebviewchromium_plat_support
+
 
 ifneq (1,$(words $(filter $(LOCAL_DISABLE_GRAPHITE),$(LOCAL_MODULE))))
   ifdef LOCAL_CONLYFLAGS
