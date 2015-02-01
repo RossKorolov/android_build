@@ -46,7 +46,8 @@ LOCAL_DISABLE_GRAPHITE := \
    Email \
    libwebviewchromium \
    libwebviewchromium_loader \
-   libwebviewchromium_plat_support
+   libwebviewchromium_plat_support \
+   unrar
 
 
 ifneq (1,$(words $(filter $(LOCAL_DISABLE_GRAPHITE),$(LOCAL_MODULE))))
