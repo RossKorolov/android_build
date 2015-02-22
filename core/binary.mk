@@ -97,6 +97,7 @@ else
   endif
 endif
 
+##########################################################################
 # Copyright (C) 2014-2015 The SaberMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -110,12 +111,28 @@ endif
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
+##########################################################################
 
-# Include custom gcc flags.  Seperate them so they can be easily managed.
+# Add pthread support for non-Clang modules
+ifneq ($(strip $(LOCAL_IS_HOST_MODULE)),true)
+  include $(BUILD_SYSTEM)/pthread.mk
+endif
+
+ifneq ($(strip $(LOCAL_IS_HOST_MODULE)),true)
+  include $(BUILD_SYSTEM)/thumb_interwork.mk
+endif
 
 # O3 - use this by default
-include $(BUILD_SYSTEM)/O3.mk
+ifneq ($(strip $(LOCAL_IS_HOST_MODULE)),true)
+  include $(BUILD_SYSTEM)/O3.mk
+endif
+
+# Add some extra GCC pizzaz
+ifneq ($(strip $(LOCAL_IS_HOST_MODULE)),true)
+  ifneq ($(strip $(LOCAL_CLANG)),true)
+    include $(BUILD_SYSTEM)/gcconly.mk
+  endif
+endif
 
 # Do not use graphite on host modules or the clang compiler.
 ifneq ($(strip $(LOCAL_IS_HOST_MODULE)),true)
@@ -123,7 +140,6 @@ ifneq ($(strip $(LOCAL_IS_HOST_MODULE)),true)
 
     # If it gets this far enable graphite by default from here on out.
     include $(BUILD_SYSTEM)/graphite.mk
-    include $(BUILD_SYSTEM)/strict.mk
   endif
 endif
 
