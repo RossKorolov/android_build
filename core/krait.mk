@@ -14,6 +14,7 @@
 #
 
 LOCAL_DISABLE_KRAIT := \
+	libdl \
 	libc_dns \
 	libc_tzcode \
 	bluetooth.default \
