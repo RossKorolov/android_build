@@ -121,11 +121,6 @@ ifneq ($(strip $(LOCAL_IS_HOST_MODULE)),true)
   include $(BUILD_SYSTEM)/thumb_interwork.mk
 endif
 
-# Add some flags for krait
-ifneq ($(strip $(LOCAL_IS_HOST_MODULE)),true)
-  include $(BUILD_SYSTEM)/krait.mk
-endif
-
 # O3 - use this by default
 include $(BUILD_SYSTEM)/O3.mk
 
