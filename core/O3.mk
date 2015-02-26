@@ -20,6 +20,8 @@ LOCAL_DISABLE_O3 := \
 
 O3_FLAGS := \
    -O3 \
+   -DNDEBUG \
+   -pipe \
    -Wno-error=array-bounds \
    -Wno-error=strict-overflow
 
