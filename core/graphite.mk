@@ -13,16 +13,7 @@
 # limitations under the License.
 #
 
-GRAPHITE_FLAGS := \
-   -fgraphite \
-   -fgraphite-identity \
-   -floop-flatten \
-   -floop-parallelize-all \
-   -ftree-loop-linear \
-   -floop-interchange \
-   -floop-strip-mine \
-   -floop-block \
-   -Wno-error=maybe-uninitialized
+GRAPHITE_FLAGS := $(call cc-option,$(-fgraphite -fgraphite-identity -floop-flatten -floop-parallelize-all -ftree-loop-linear -floop-interchange -floop-strip-mine -floop-block -Wno-error=maybe-uninitialized))
 
 # Force disable some modules that are not compatible with graphite flags
 LOCAL_DISABLE_GRAPHITE := \
@@ -57,6 +48,12 @@ ifneq (1,$(words $(filter $(LOCAL_DISABLE_GRAPHITE),$(LOCAL_MODULE))))
     LOCAL_CONLYFLAGS := $(GRAPHITE_FLAGS)
   endif
 
+  ifdef LOCAL_CFLAGS
+    LOCAL_CFLAGS += $(GRAPHITE_FLAGS)
+  else
+    LOCAL_CFLAGS := $(GRAPHITE_FLAGS)
+  endif
+
   ifdef LOCAL_CPPFLAGS
     LOCAL_CPPFLAGS += $(GRAPHITE_FLAGS)
   else
@@ -67,6 +64,48 @@ ifneq (1,$(words $(filter $(LOCAL_DISABLE_GRAPHITE),$(LOCAL_MODULE))))
     LOCAL_LDFLAGS  := $(GRAPHITE_FLAGS)
   else
     LOCAL_LDFLAGS  += $(GRAPHITE_FLAGS)
+  endif
+
+  ifdef $(combo_2nd_arch_prefix)TARGET_arm_CFLAGS
+    $(combo_2nd_arch_prefix)TARGET_arm_CFLAGS += $(GRAPHITE_FLAGS)
+  else
+    $(combo_2nd_arch_prefix)TARGET_arm_CFLAGS := $(GRAPHITE_FLAGS)
+  endif
+ 
+  ifdef $(combo_2nd_arch_prefix)TARGET_thumb_CFLAGS
+    $(combo_2nd_arch_prefix)TARGET_thumb_CFLAGS += $(GRAPHITE_FLAGS)
+  else
+    $(combo_2nd_arch_prefix)TARGET_thumb_CFLAGS := $(GRAPHITE_FLAGS)
+  endif
+ 
+  ifdef $(combo_2nd_arch_prefix)TARGET_GLOBAL_CPPFLAGS
+    $(combo_2nd_arch_prefix)TARGET_GLOBAL_CPPFLAGS += $(GRAPHITE_FLAGS)
+  else
+    $(combo_2nd_arch_prefix)TARGET_GLOBAL_CPPFLAGS := $(GRAPHITE_FLAGS)
+  endif
+ 
+  ifdef $(combo_2nd_arch_prefix)TARGET_RELEASE_CPPFLAGS
+    $(combo_2nd_arch_prefix)TARGET_RELEASE_CPPFLAGS += $(GRAPHITE_FLAGS)
+  else
+    $(combo_2nd_arch_prefix)TARGET_RELEASE_CPPFLAGS := $(GRAPHITE_FLAGS)
+  endif
+
+  ifdef $(combo_var_prefix)GLOBAL_CFLAGS
+    $(combo_var_prefix)GLOBAL_CFLAGS += $(GRAPHITE_FLAGS)
+  else
+    $(combo_var_prefix)GLOBAL_CFLAGS := $(GRAPHITE_FLAGS)
+  endif
+
+  ifdef $(combo_var_prefix)RELEASE_CFLAGS
+    $(combo_var_prefix)RELEASE_CFLAGS += $(GRAPHITE_FLAGS)
+  else
+    $(combo_var_prefix)RELEASE_CFLAGS := $(GRAPHITE_FLAGS)
+  endif 
+
+  ifdef $(combo_var_prefix)GLOBAL_CPPFLAGS
+    $(combo_var_prefix)GLOBAL_CPPFLAGS += $(GRAPHITE_FLAGS)
+  else
+    $(combo_var_prefix)GLOBAL_CPPFLAGS := $(GRAPHITE_FLAGS)
   endif
 endif
 #####
