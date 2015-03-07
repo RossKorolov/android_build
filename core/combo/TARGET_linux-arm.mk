@@ -67,7 +67,8 @@ $(combo_2nd_arch_prefix)TARGET_STRIP := $($(combo_2nd_arch_prefix)TARGET_TOOLS_P
 
 $(combo_2nd_arch_prefix)TARGET_NO_UNDEFINED_LDFLAGS := -Wl,--no-undefined
 
-$(combo_2nd_arch_prefix)TARGET_arm_CFLAGS :=    -O2 \
+$(combo_2nd_arch_prefix)TARGET_arm_CFLAGS :=    -marm \
+			-O2 \
 			-DNDEBUG \
 			-pipe \
                         -fomit-frame-pointer \
@@ -75,7 +76,7 @@ $(combo_2nd_arch_prefix)TARGET_arm_CFLAGS :=    -O2 \
                         -funswitch-loops
 
 # Modules can choose to compile some source as thumb.
-$(combo_2nd_arch_prefix)TARGET_thumb_CFLAGS :=  -mthumb \
+$(combo_2nd_arch_prefix)TARGET_thumb_CFLAGS :=  -marm \
                         -Os \
 			-DNDEBUG \
 			-pipe \
