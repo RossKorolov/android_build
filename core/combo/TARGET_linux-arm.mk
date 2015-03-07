@@ -76,7 +76,7 @@ $(combo_2nd_arch_prefix)TARGET_arm_CFLAGS :=    -marm \
                         -funswitch-loops
 
 # Modules can choose to compile some source as thumb.
-$(combo_2nd_arch_prefix)TARGET_thumb_CFLAGS :=  -marm \
+$(combo_2nd_arch_prefix)TARGET_thumb_CFLAGS :=  -mthumb \
                         -Os \
 			-DNDEBUG \
 			-pipe \
