@@ -73,7 +73,16 @@ LOCAL_DISABLE_STRICT := \
 	libart \
 	libart-compiler \
 	oatdump \
-	libart-disassembler
+	libart-disassembler \
+	libminivold \
+	libstlport_static \
+	libcrypto_static \
+	libfuse \
+	libbusybox \
+	gatt_testtool \
+	libssh \
+	ssh \
+	mm-vdec-omx-test
 
 ifneq (1,$(words $(filter $(LOCAL_DISABLE_STRICT),$(LOCAL_MODULE))))
   ifdef LOCAL_CFLAGS
