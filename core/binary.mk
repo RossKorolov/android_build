@@ -116,6 +116,9 @@ endif
 
 # Include custom gcc flags.  Seperate them so they can be easily managed.
 
+# Use pipe flag to speed up building process
+include $(BUILD_SYSTEM)/pipe.mk
+
 # arm thumb
 ifneq ($(strip $(LOCAL_IS_HOST_MODULE)),true)
   include $(BUILD_SYSTEM)/thumb_interwork.mk
