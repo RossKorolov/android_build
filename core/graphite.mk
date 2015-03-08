@@ -22,7 +22,6 @@ GRAPHITE_FLAGS := \
    -floop-interchange \
    -floop-strip-mine \
    -floop-block \
-   -Qunused-arguments \
    -Wno-error=maybe-uninitialized
 
 # Force disable some modules that are not compatible with graphite flags
