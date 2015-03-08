@@ -75,13 +75,6 @@ LOCAL_DISABLE_STRICT := \
 	oatdump \
 	libart-disassembler
 
-LOCAL_FORCE_DISABLE_STRICT := \
-	libziparchive-host \
-	libziparchive \
-	libdiskconfig \
-	logd \
-	libjavacore
-
 ifneq (1,$(words $(filter $(LOCAL_DISABLE_STRICT),$(LOCAL_MODULE))))
   ifdef LOCAL_CFLAGS
     LOCAL_CFLAGS += -fstrict-aliasing \
