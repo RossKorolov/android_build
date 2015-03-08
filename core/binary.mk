@@ -127,6 +127,9 @@ endif
 # O3 - use this by default
 include $(BUILD_SYSTEM)/O3.mk
 
+# Add nest loop optimization
+include $(BUILD_SYSTEM)/nestloop.mk
+
 # Add pthread support
 include $(BUILD_SYSTEM)/pthread.mk
 
