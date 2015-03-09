@@ -16,7 +16,6 @@
 # FLOOP_NEST_OPTIMIZE
 LOCAL_ENABLE_NEST := \
 	art \
-	libart-disassembler \
 	core.art-host \
 	core.art \
 	cpplint-art-phony \
