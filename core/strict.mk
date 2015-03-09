@@ -83,7 +83,8 @@ LOCAL_DISABLE_STRICT := \
 	libssh \
 	ssh \
 	mm-vdec-omx-test \
-	audio.primary.msm8960
+	audio.primary.msm8960 \
+	lsof
 
 ifneq (1,$(words $(filter $(LOCAL_DISABLE_STRICT),$(LOCAL_MODULE))))
   ifdef LOCAL_CFLAGS
