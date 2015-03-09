@@ -82,7 +82,8 @@ LOCAL_DISABLE_STRICT := \
 	gatt_testtool \
 	libssh \
 	ssh \
-	mm-vdec-omx-test
+	mm-vdec-omx-test \
+	audio.primary.msm8960
 
 ifneq (1,$(words $(filter $(LOCAL_DISABLE_STRICT),$(LOCAL_MODULE))))
   ifdef LOCAL_CFLAGS
