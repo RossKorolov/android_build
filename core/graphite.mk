@@ -48,7 +48,8 @@ LOCAL_DISABLE_GRAPHITE := \
    libwebviewchromium_loader \
    libwebviewchromium_plat_support \
    unrar \
-   libc_common
+   libc_common \
+   libncurses
 
 ifneq (1,$(words $(filter $(LOCAL_DISABLE_GRAPHITE),$(LOCAL_MODULE))))
   ifdef LOCAL_CONLYFLAGS
