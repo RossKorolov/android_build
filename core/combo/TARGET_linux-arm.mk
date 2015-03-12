@@ -69,7 +69,6 @@ $(combo_2nd_arch_prefix)TARGET_NO_UNDEFINED_LDFLAGS := -Wl,--no-undefined
 
 $(combo_2nd_arch_prefix)TARGET_arm_CFLAGS :=    -O2 \
 			-DNDEBUG \
-			-pipe \
                         -fomit-frame-pointer \
                         -fstrict-aliasing    \
                         -funswitch-loops
@@ -78,7 +77,6 @@ $(combo_2nd_arch_prefix)TARGET_arm_CFLAGS :=    -O2 \
 $(combo_2nd_arch_prefix)TARGET_thumb_CFLAGS :=  -mthumb \
                         -Os \
 			-DNDEBUG \
-			-pipe \
                         -fomit-frame-pointer \
                         -fno-strict-aliasing
 
@@ -99,7 +97,6 @@ endif
 android_config_h := $(call select-android-config-h,linux-arm)
 
 $(combo_2nd_arch_prefix)TARGET_GLOBAL_CFLAGS += \
-			-pipe \
 			-msoft-float \
 			-ffunction-sections \
 			-fdata-sections \
@@ -147,12 +144,10 @@ $(combo_2nd_arch_prefix)TARGET_GLOBAL_CFLAGS += -mthumb-interwork
 
 $(combo_2nd_arch_prefix)TARGET_GLOBAL_CPPFLAGS += \
 			-DNDEBUG \
-			-pipe \
 			-fvisibility-inlines-hidden 
 
 # More flags/options can be added here
 $(combo_2nd_arch_prefix)TARGET_RELEASE_CFLAGS := \
-			-pipe \
 			-DNDEBUG \
 			-g \
 			-Wstrict-aliasing=2 \
