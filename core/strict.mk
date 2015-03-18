@@ -86,47 +86,35 @@ LOCAL_DISABLE_STRICT := \
 	audio.primary.msm8960 \
 	lsof
 
+STRICT_ALIAS := \
+   -fstrict-aliasing \
+   -Werror=strict-aliasing 
+
 ifneq (1,$(words $(filter $(LOCAL_DISABLE_STRICT),$(LOCAL_MODULE))))
   ifdef LOCAL_CFLAGS
-    LOCAL_CFLAGS += -fstrict-aliasing \
-	-Werror=strict-aliasing \
-	$(call cc-option, -fstrict-aliasing, -Wstrict-aliasing=3, -Werror=strict-aliasing)
+    LOCAL_CFLAGS += $(STRICT_ALIAS)
   else
-    LOCAL_CFLAGS := -fstrict-aliasing \
-	-Werror=strict-aliasing \
-	$(call cc-option, -fstrict-aliasing, -Wstrict-aliasing=3, -Werror=strict-aliasing)
+    LOCAL_CFLAGS := $(STRICT_ALIAS)
   endif
 
   ifdef LOCAL_CPPFLAGS
-    LOCAL_CPPFLAGS += -fstrict-aliasing \
-	-Werror=strict-aliasing \
-	$(call cpp-option, -fstrict-aliasing, -Wstrict-aliasing=3, -Werror=strict-aliasing)
+    LOCAL_CPPFLAGS += $(STRICT_ALIAS)
   else
-    LOCAL_CPPFLAGS := -fstrict-aliasing \
-	-Werror=strict-aliasing \
-	$(call cpp-option, -fstrict-aliasing, -Wstrict-aliasing=3, -Werror=strict-aliasing)
+    LOCAL_CPPFLAGS := $(STRICT_ALIAS)
   endif
 
   ifdef LOCAL_CONLYFLAGS
-    LOCAL_CONLYFLAGS += -fstrict-aliasing \
-	-Werror=strict-aliasing \
-	$(call cc-option, -fstrict-aliasing, -Wstrict-aliasing=3, -Werror=strict-aliasing)
+    LOCAL_CONLYFLAGS += $(STRICT_ALIAS)
   else
-    LOCAL_CONLYFLAGS := -fstrict-aliasing \
-	-Werror=strict-aliasing \
-	$(call cc-option, -fstrict-aliasing, -Wstrict-aliasing=3, -Werror=strict-aliasing)
+    LOCAL_CONLYFLAGS := $(STRICT_ALIAS)
   endif
 
   ifndef LOCAL_CLANG
-    LOCAL_CONLYFLAGS += \
-	-Wstrict-aliasing=3
-    LOCAL_CPPFLAGS += \
-	-Wstrict-aliasing=3
+    LOCAL_CONLYFLAGS += -Wstrict-aliasing=3
+    LOCAL_CPPFLAGS += -Wstrict-aliasing=3
   else
-    LOCAL_CONLYFLAGS += \
-	-Wstrict-aliasing=2
-    LOCAL_CPPFLAGS += \
-	-Wstrict-aliasing=2
+    LOCAL_CONLYFLAGS += -Wstrict-aliasing=2
+    LOCAL_CPPFLAGS += -Wstrict-aliasing=2
   endif
 endif
 
@@ -139,19 +127,15 @@ LOCAL_FORCE_DISABLE_STRICT := \
 
 ifeq (1,$(words $(filter $(LOCAL_FORCE_DISABLE_STRICT),$(LOCAL_MODULE))))
   ifdef LOCAL_CONLYFLAGS
-    LOCAL_CONLYFLAGS += \
-	-fno-strict-aliasing
+    LOCAL_CONLYFLAGS +=	-fno-strict-aliasing
   else
-    LOCAL_CONLYFLAGS := \
-	-fno-strict-aliasing
+    LOCAL_CONLYFLAGS :=	-fno-strict-aliasing
   endif
 
   ifdef LOCAL_CPPFLAGS
-    LOCAL_CPPFLAGS += \
-	-fno-strict-aliasing
+    LOCAL_CPPFLAGS += -fno-strict-aliasing
   else
-    LOCAL_CPPFLAGS := \
-	-fno-strict-aliasing
+    LOCAL_CPPFLAGS := -fno-strict-aliasing
   endif
 endif
 #####
