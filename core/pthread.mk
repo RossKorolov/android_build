@@ -24,10 +24,4 @@ ifneq (1,$(words $(filter $(LOCAL_DISABLE_PTHREAD),$(LOCAL_MODULE))))
     LOCAL_CFLAGS := -pthread
   endif
 
-  ifdef LOCAL_CPPFLAGS
-    LOCAL_CPPFLAGS += -pthread
-  else
-    LOCAL_CPPFLAGS := -pthread
-  endif
-
 endif
