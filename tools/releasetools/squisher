@@ -23,7 +23,7 @@ if [ -z "$OUT" -o ! -d "$OUT" ]; then
 	exit 1
 fi
 
-OTAPACKAGE=$OUT/SaberModCM12-$(date -u +%Y%m%d).zip
+OTAPACKAGE=$OUT/SaberModCM12.1-$(date -u +%Y%m%d).zip
 
 if [ ! -f "$OTAPACKAGE" ]; then
 	echo "$OTAPACKAGE doesn't exist!";
